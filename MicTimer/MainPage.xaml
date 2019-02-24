@@ -35,6 +35,7 @@
                     FontSize="24"
                     Foreground="White"
                     Background="Tomato"
+                    
                     Grid.Row="1"
                     Click="StartTimer"/>
 
