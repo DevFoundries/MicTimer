@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using MicTimer.ViewModel;
 
@@ -47,5 +48,13 @@ namespace MicTimer
             Vm.RunClock();
         }
 
+        private void FrameworkElement_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var textBlock = sender as TextBlock;
+            if (textBlock != null)
+            {
+                textBlock.HorizontalTextAlignment = TextAlignment.Center;
+            }
+        }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -20,7 +23,7 @@ namespace MicTimer.ViewModel
     {
         private readonly IDataService _dataService;
         private readonly INavigationService _navigationService;
-        private string _clock = "Starting...";
+        private string _clock = "00:00";
         private RelayCommand<string> _navigateCommand;
         private bool _runClock;
         private string _welcomeTitle = string.Empty;
@@ -83,10 +86,16 @@ namespace MicTimer.ViewModel
                     {
                         DispatcherHelper.CheckBeginInvokeOnUI(() =>
                         {
-                            Clock = TimeSpan.FromSeconds(tenMinutes).ToString("hh\\:mm\\:ss");
+                            Clock = TimeSpan.FromSeconds(tenMinutes).ToString("mm\\:ss");
+                            if (tenMinutes <= 150 && tenMinutes > 0)
+                            {
+                                BackgroundColor = Colors.DarkGoldenrod;
+
+                            }
                             if (tenMinutes <= 0)
                             {
                                 Clock = "- " + Clock;
+                                BackgroundColor = Colors.Red;
                             }
 
                             tenMinutes--;
@@ -101,8 +110,22 @@ namespace MicTimer.ViewModel
             });
         }
 
+        private Color _solidColor = Colors.Black;
+        public Color BackgroundColor
+        {
+            get
+            {
+                return _solidColor;
+            }
+            set
+            {
+                Set(ref _solidColor, value);
+            }
+        }    
+
         public void ResetClock()
         {
+            BackgroundColor = Colors.Black;
             tenMinutes = 60 * 10;
         }
 

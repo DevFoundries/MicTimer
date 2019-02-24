@@ -12,78 +12,41 @@
 
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.906,1.164"
-                                 StartPoint="0.244,-0.159">
-                <GradientStop Color="#FFA20000"
-                              Offset="0" />
-                <GradientStop Color="#FFCD7C10"
-                              Offset="1" />
-            </LinearGradientBrush>
+            <SolidColorBrush Color="{Binding BackgroundColor}"></SolidColorBrush>
         </Grid.Background>
-
-        <StackPanel Background="#FF1F1F1F"
-                    Width="300"
-                    HorizontalAlignment="Center"
-                    Height="450"
-                    VerticalAlignment="Center">
-            <Button Content="Increment counter"
-                    HorizontalAlignment="Stretch"
-                    Margin="0,0,0,20"
-                    FontSize="24"
-                    Command="{Binding IncrementCommand, Mode=OneWay}"
-                    Foreground="White" />
-
-            <TextBlock Text="Navigate to page 2"
-                       HorizontalAlignment="Stretch"
-                       Margin="0,0,0,20"
-                       FontSize="24"
-                       Foreground="White"
-                       TextAlignment="Center">
-
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-            			<core:InvokeCommandAction Command="{Binding NavigateCommand, Mode=OneWay}"
-                                                  CommandParameter="{Binding Text, ElementName=NavigationParameterText}" />
-            		</core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-
-            </TextBlock>
-
-            <TextBox x:Name="NavigationParameterText"
-                     Text="Enter any text for nav..."
-                     Margin="0,0,0,20"
-                     FontSize="24"
-                     Foreground="White" />
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
             <Button Content="Stop Timer"
-                    HorizontalAlignment="Stretch"
-                    Margin="0,0,0,20"
-                    FontSize="24"
-                    Foreground="White" 
-                    Click="StopTimer"/>
-
-            <Button Content="Start Clock"
-                    HorizontalAlignment="Stretch"
+                    HorizontalAlignment="Center"
                     Margin="0,0,0,20"
                     FontSize="24"
                     Foreground="White"
+                    Background="Tomato"
+                    
+                    Grid.Row="0"
+                    Click="StopTimer"/>
+
+            <Button Content="Start Clock"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,20"
+                    FontSize="24"
+                    Foreground="White"
+                    Background="Tomato"
+                    Grid.Row="1"
                     Click="StartTimer"/>
 
-            <TextBlock TextWrapping="Wrap"
-                       Text="{Binding WelcomeTitle}"
-                       FontFamily="Segoe UI Light"
-                       FontSize="24"
-                       Margin="0,0,0,20"
-                       HorizontalAlignment="Center"
-                       TextAlignment="Center"
-                       Foreground="White" />
-
             <TextBlock FontFamily="Segoe UI Light"
-                       FontSize="20"
+                       FontSize="450"
                        HorizontalAlignment="Center"
                        TextAlignment="Center"
+                       VerticalAlignment="Center"
                        Foreground="White"
-                       Text="{Binding Clock}" />
-        </StackPanel>
+                       Grid.Row="2"
+                       Text="{Binding Clock}"
+                       SizeChanged="FrameworkElement_OnSizeChanged"
+                       />
     </Grid>
 </Page>
