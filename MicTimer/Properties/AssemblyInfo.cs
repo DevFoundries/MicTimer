@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MicTimer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Timer for speaches or open mic events")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("MicTimer")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("DevFoundries, LLC")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
