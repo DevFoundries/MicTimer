@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="0528346d-d71e-4e94-a540-19f35b8b7932" Publisher="CN=YourName" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="0528346d-d71e-4e94-a540-19f35b8b7932" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="55379Wm.BarrettSimms.MicTimer" Publisher="CN=7B4F372A-32B9-405A-AE54-EE84EB99028B" Version="1.0.3.0" />
+  <mp:PhoneIdentity PhoneProductId="c79d5f63-32aa-4235-b4fa-8ab19086279a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>MicTimer</DisplayName>
-    <PublisherDisplayName>YourName</PublisherDisplayName>
+    <DisplayName>Mic Timer</DisplayName>
+    <PublisherDisplayName>Wm. Barrett Simms</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MicTimer.App">
-      <uap:VisualElements DisplayName="MicTimer" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Timer for any type of mic event." BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Mic Timer" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Timer for any type of mic event." BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
