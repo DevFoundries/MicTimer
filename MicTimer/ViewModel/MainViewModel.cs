@@ -40,6 +40,25 @@ namespace MicTimer.ViewModel
             }
         }
 
+        private RelayCommand<string> _timerCommand;
+        public RelayCommand<string> TimerCommand
+        {
+
+            get
+            {
+                return _timerCommand
+                       ?? (_timerCommand = new RelayCommand<string>(
+                           p =>
+                           {
+                               var minutes = Convert.ToInt32(p);
+                               timerMinutes = minutes;
+                               currentTimer = timerMinutes * 60;
+                               Clock = TimeSpan.FromSeconds(currentTimer).ToString("mm\\:ss");
+                           }
+                       ));
+            }
+        }
+
         public RelayCommand<string> NavigateCommand
         {
             get
@@ -73,9 +92,11 @@ namespace MicTimer.ViewModel
             Initialize();
         }
 
-        private int tenMinutes = 10*60;
+        private int timerMinutes = 10;
+        private int currentTimer = 0;
         public void RunClock()
         {
+            currentTimer = timerMinutes * 60;
             _runClock = true;
 
             Task.Run(async () =>
@@ -86,19 +107,19 @@ namespace MicTimer.ViewModel
                     {
                         DispatcherHelper.CheckBeginInvokeOnUI(() =>
                         {
-                            Clock = TimeSpan.FromSeconds(tenMinutes).ToString("mm\\:ss");
-                            if (tenMinutes <= 150 && tenMinutes > 0)
+                            Clock = TimeSpan.FromSeconds(currentTimer).ToString("mm\\:ss");
+                            if (currentTimer <= 150 && currentTimer > 0)
                             {
                                 BackgroundColor = Colors.DarkGoldenrod;
 
                             }
-                            if (tenMinutes <= 0)
+                            if (timerMinutes <= 0)
                             {
                                 Clock = "- " + Clock;
                                 BackgroundColor = Colors.Red;
                             }
 
-                            tenMinutes--;
+                            currentTimer--;
                         });
 
                         await Task.Delay(1000);
@@ -126,7 +147,7 @@ namespace MicTimer.ViewModel
         public void ResetClock()
         {
             BackgroundColor = Colors.Black;
-            tenMinutes = 60 * 10;
+            currentTimer = timerMinutes * 60;
         }
 
         public void StopClock()
@@ -147,5 +168,7 @@ namespace MicTimer.ViewModel
                 WelcomeTitle = ex.Message;
             }
         }
+
+
     }
 }

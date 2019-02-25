@@ -39,11 +39,15 @@ namespace MicTimer
 
         private void StopTimer(object sender, RoutedEventArgs e)
         {
+            this.StartButton.Visibility = Visibility.Visible;
+            this.StopButton.Visibility = Visibility.Collapsed;
             Vm.StopClock();
         }
 
         private void StartTimer(object sender, RoutedEventArgs e)
         {
+            this.StopButton.Visibility = Visibility.Visible;
+            this.StartButton.Visibility = Visibility.Collapsed;
             Vm.ResetClock();
             Vm.RunClock();
         }

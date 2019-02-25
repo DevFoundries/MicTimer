@@ -19,35 +19,20 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-            <Button Content="Stop Timer"
-                    HorizontalAlignment="Center"
-                    Margin="0,0,0,20"
-                    FontSize="24"
-                    Foreground="White"
-                    Background="Tomato"
-                    
-                    Grid.Row="0"
-                    Click="StopTimer"/>
-
-            <Button Content="Start Clock"
-                    HorizontalAlignment="Center"
-                    Margin="0,0,0,20"
-                    FontSize="24"
-                    Foreground="White"
-                    Background="Tomato"
-                    
-                    Grid.Row="1"
-                    Click="StartTimer"/>
-
-            <TextBlock FontFamily="Segoe UI Light"
-                       FontSize="450"
-                       HorizontalAlignment="Center"
-                       TextAlignment="Center"
-                       VerticalAlignment="Center"
-                       Foreground="White"
-                       Grid.Row="2"
-                       Text="{Binding Clock}"
-                       SizeChanged="FrameworkElement_OnSizeChanged"
-                       />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="TimerPanel" Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Content="10 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="10"></Button>
+            <Button Content="12 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="12"></Button>
+            <Button Content="15 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="15"></Button>
+            <Button Content="20 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="20"></Button>
+        </StackPanel>
+        <StackPanel x:Name="StartStopPanel" Orientation="Horizontal" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Right">
+            <Button x:Name="StopButton" Visibility="Collapsed" Content="Stop Timer" HorizontalAlignment="Center" Margin="10" FontSize="24" Foreground="White" Background="Tomato" Click="StopTimer"/>
+            <Button x:Name="StartButton" Visibility="Visible" Content="Start Clock" HorizontalAlignment="Center" Margin="10" FontSize="24" Foreground="White" Background="Tomato" Click="StartTimer"/>
+        </StackPanel>
+        <TextBlock Grid.ColumnSpan="2" FontFamily="Segoe UI Light" FontSize="450" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Grid.Row="2" Text="{Binding Clock}" SizeChanged="FrameworkElement_OnSizeChanged" />
     </Grid>
 </Page>
