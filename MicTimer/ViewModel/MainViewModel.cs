@@ -113,7 +113,7 @@ namespace MicTimer.ViewModel
                                 BackgroundColor = Colors.DarkGoldenrod;
 
                             }
-                            if (timerMinutes <= 0)
+                            if (currentTimer <= 0)
                             {
                                 Clock = "- " + Clock;
                                 BackgroundColor = Colors.Red;
