@@ -1,16 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MicTimer.Model;
 
 namespace MicTimer.Design
 {
     public class DesignDataService : IDataService
     {
-        public Task<DataItem> GetData()
-        {
-            // Use this to create design time data
+	    public List<DurationOption> GetDurationOptions()
+	    {
+			return new List<DurationOption>()
+			{
+				new DurationOption() {Minutes = 10, Label = "10 Minutes"},
+				new DurationOption() {Minutes = 12, Label = "12 Minutes"},
+				new DurationOption() {Minutes = 15, Label = "15 Minutes"},
+				new DurationOption() {Minutes = 20, Label = "20 Minutes"},
+			};
+	    }
+	    public void SaveDurationOptions(List<DurationOption> durationOptions)
+	    {
+	    }
 
-            var item = new DataItem("Welcome to MVVM Light [design]");
-            return Task.FromResult(item);
-        }
-    }
+
+	}
 }

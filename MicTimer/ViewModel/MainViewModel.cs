@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Windows.Storage.Search;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
@@ -27,8 +30,15 @@ namespace MicTimer.ViewModel
         private RelayCommand<string> _navigateCommand;
         private bool _runClock;
         private string _welcomeTitle = string.Empty;
+		private List<DurationOption> durationOptions;
 
-        public string Clock
+		public List<DurationOption> DurationOptions
+		{
+			get { return this.durationOptions; }
+			set { Set(ref durationOptions, value); }
+		}
+
+		public string Clock
         {
             get
             {
@@ -96,6 +106,7 @@ namespace MicTimer.ViewModel
         private int currentTimer = 0;
         public void RunClock()
         {
+	        if (_runClock) return;
             currentTimer = timerMinutes * 60;
             _runClock = true;
 
@@ -155,12 +166,11 @@ namespace MicTimer.ViewModel
             _runClock = false;
         }
 
-        private async Task Initialize()
+        private void Initialize()
         {
             try
             {
-                var item = await _dataService.GetData();
-                WelcomeTitle = item.Title;
+                DurationOptions = _dataService.GetDurationOptions();
             }
             catch (Exception ex)
             {
