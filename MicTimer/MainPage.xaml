@@ -17,18 +17,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="TimerPanel" Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="10 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="10"></Button>
-            <Button Content="12 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="12"></Button>
-            <Button Content="15 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="15"></Button>
-            <Button Content="20 Minutes" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="20"></Button>
-        </StackPanel>
+        <ListView ItemsSource="{Binding DurationOptions}" x:Name="TimerPanel" Grid.Row="0" Grid.Column="0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Label}" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="{Binding Minutes}"></Button>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <StackPanel x:Name="StartStopPanel" Orientation="Horizontal" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Right">
             <Button x:Name="StopButton" Visibility="Collapsed" Content="Stop Timer" HorizontalAlignment="Center" Margin="10" FontSize="24" Foreground="White" Background="Tomato" Click="StopTimer"/>
             <Button x:Name="StartButton" Visibility="Visible" Content="Start Clock" HorizontalAlignment="Center" Margin="10" FontSize="24" Foreground="White" Background="Tomato" Click="StartTimer"/>
@@ -39,8 +44,8 @@
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsOpen="True">
-            <AppBarButton Icon="Stop" Label="Stop" />
-            <AppBarButton Icon="Play" Label="Play" />
+            <AppBarButton Icon="Stop" Label="Stop" Click="StopTimer" />
+            <AppBarButton Icon="Play" Label="Play" Click="StartTimer" />
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
