@@ -28,9 +28,15 @@ namespace MicTimer.ViewModel
         private readonly INavigationService _navigationService;
         private string _clock = "00:00";
         private RelayCommand<string> _navigateCommand;
-        private bool _runClock;
+        private bool isRunning;
         private string _welcomeTitle = string.Empty;
 		private List<DurationOption> durationOptions;
+
+		public bool IsRunning
+		{
+			get => isRunning;
+			set => Set(ref isRunning, value);
+		}
 
 		public List<DurationOption> DurationOptions
 		{
@@ -50,34 +56,34 @@ namespace MicTimer.ViewModel
             }
         }
 
-        private RelayCommand<string> _timerCommand;
-        public RelayCommand<string> TimerCommand
+        private RelayCommand<int> _timerCommand;
+        public RelayCommand<int> TimerCommand
         {
-
-            get
+	        get
             {
                 return _timerCommand
-                       ?? (_timerCommand = new RelayCommand<string>(
+                       ?? (_timerCommand = new RelayCommand<int>(
                            p =>
                            {
-                               var minutes = Convert.ToInt32(p);
-                               timerMinutes = minutes;
+                               timerMinutes = p;
                                currentTimer = timerMinutes * 60;
                                Clock = TimeSpan.FromSeconds(currentTimer).ToString("mm\\:ss");
                            }
                        ));
             }
+	        set => throw new NotImplementedException();
         }
 
         public RelayCommand<string> NavigateCommand
         {
-            get
+	        get
             {
                 return _navigateCommand
                        ?? (_navigateCommand = new RelayCommand<string>(
                            p => _navigationService.NavigateTo(ViewModelLocator.SecondPageKey, p),
                            p => !string.IsNullOrEmpty(p)));
             }
+	        set => throw new NotImplementedException();
         }
 
         public string WelcomeTitle
@@ -106,13 +112,13 @@ namespace MicTimer.ViewModel
         private int currentTimer = 0;
         public void RunClock()
         {
-	        if (_runClock) return;
+	        if (IsRunning) return;
             currentTimer = timerMinutes * 60;
-            _runClock = true;
+            IsRunning = true;
 
             Task.Run(async () =>
             {
-                while (_runClock)
+                while (IsRunning)
                 {
                     try
                     {
@@ -163,7 +169,7 @@ namespace MicTimer.ViewModel
 
         public void StopClock()
         {
-            _runClock = false;
+			this.IsRunning = false;
         }
 
         private void Initialize()

@@ -6,9 +6,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:converters="using:MicTimer.Converters"
       x:Class="MicTimer.MainPage"
       mc:Ignorable="d ignore"
       DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <converters:BooleanInvertConverter x:Key="BooleanInvertConverter"></converters:BooleanInvertConverter>
+    </Page.Resources>
 
     <Grid>
         <Grid.Background>
@@ -30,22 +35,19 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Label}" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding TimerCommand}" CommandParameter="{Binding Minutes}"></Button>
+                    <Button Content="{Binding Label}" Foreground="White" Background="Tomato" Margin="10" FontSize="24" Command="{Binding Source={StaticResource Locator}, Path=Main.TimerCommand}" CommandParameter="{Binding Minutes}"></Button>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel x:Name="StartStopPanel" Orientation="Horizontal" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Right">
-            <Button x:Name="StopButton" Visibility="Collapsed" Content="Stop Timer" HorizontalAlignment="Center" Margin="10" FontSize="24" Foreground="White" Background="Tomato" Click="StopTimer"/>
-            <Button x:Name="StartButton" Visibility="Visible" Content="Start Clock" HorizontalAlignment="Center" Margin="10" FontSize="24" Foreground="White" Background="Tomato" Click="StartTimer"/>
-        </StackPanel>
         <TextBlock Grid.ColumnSpan="2" FontFamily="Segoe UI Light" FontSize="450" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Grid.Row="2" Text="{Binding Clock}" SizeChanged="FrameworkElement_OnSizeChanged" />
 
         
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsOpen="True">
-            <AppBarButton Icon="Stop" Label="Stop" Click="StopTimer" />
-            <AppBarButton Icon="Play" Label="Play" Click="StartTimer" />
+            <AppBarButton Icon="Add" Label="Add" Click="AddDurationOption" />
+            <AppBarButton Icon="Stop" Label="Stop" Click="StopTimer" IsEnabled="{Binding IsRunning, Mode=OneWay}" />
+            <AppBarButton Icon="Play" Label="Start" Click="StartTimer" IsEnabled="{Binding IsRunning, Mode=OneWay, Converter={StaticResource BooleanInvertConverter}}"  />
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

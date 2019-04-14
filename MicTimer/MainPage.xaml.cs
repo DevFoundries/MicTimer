@@ -2,6 +2,9 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using CommonServiceLocator;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using MicTimer.ViewModel;
 
 namespace MicTimer
@@ -39,15 +42,11 @@ namespace MicTimer
 
         private void StopTimer(object sender, RoutedEventArgs e)
         {
-            this.StartButton.Visibility = Visibility.Visible;
-            this.StopButton.Visibility = Visibility.Collapsed;
             Vm.StopClock();
         }
 
 		private void StartTimer(object sender, RoutedEventArgs e)
         {
-            this.StopButton.Visibility = Visibility.Visible;
-            this.StartButton.Visibility = Visibility.Collapsed;
             Vm.RunClock();
         }
 
@@ -58,6 +57,13 @@ namespace MicTimer
             {
                 textBlock.HorizontalTextAlignment = TextAlignment.Center;
             }
+        }
+
+        private void AddDurationOption(object sender, RoutedEventArgs e)
+        {
+	        var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
+			navigationService.NavigateTo(ViewModelLocator.DurationOptionPageKey);
+
         }
     }
 }

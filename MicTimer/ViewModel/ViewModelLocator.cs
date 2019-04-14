@@ -16,6 +16,7 @@ namespace MicTimer.ViewModel
     public class ViewModelLocator
     {
         public const string SecondPageKey = "SecondPage";
+        public const string DurationOptionPageKey = "DurationOptionPage";
 
         /// <summary>
         /// This property can be used to force the application to run with design time data.
@@ -34,6 +35,7 @@ namespace MicTimer.ViewModel
 
             var nav = new NavigationService();
             nav.Configure(SecondPageKey, typeof(SecondPage));
+            nav.Configure(DurationOptionPageKey, typeof(DurationOptionPage));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             SimpleIoc.Default.Register<IDialogService, DialogService>();
