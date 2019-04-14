@@ -65,5 +65,12 @@ namespace MicTimer
 			navigationService.NavigateTo(ViewModelLocator.DurationOptionPageKey);
 
         }
-    }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+	        var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
+	        navigationService.NavigateTo(ViewModelLocator.AboutPageKey);
+
+		}
+	}
 }

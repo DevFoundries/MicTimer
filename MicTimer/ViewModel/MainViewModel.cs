@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage.Search;
@@ -30,7 +31,7 @@ namespace MicTimer.ViewModel
         private RelayCommand<string> _navigateCommand;
         private bool isRunning;
         private string _welcomeTitle = string.Empty;
-		private List<DurationOption> durationOptions;
+		private ObservableCollection<DurationOption> durationOptions;
 
 		public bool IsRunning
 		{
@@ -38,9 +39,9 @@ namespace MicTimer.ViewModel
 			set => Set(ref isRunning, value);
 		}
 
-		public List<DurationOption> DurationOptions
+		public ObservableCollection<DurationOption> DurationOptions
 		{
-			get { return this.durationOptions; }
+			get { return new ObservableCollection<DurationOption>(this.durationOptions);}
 			set { Set(ref durationOptions, value); }
 		}
 
@@ -172,11 +173,34 @@ namespace MicTimer.ViewModel
 			this.IsRunning = false;
         }
 
+        public void AddDurationOption(DurationOption newOption)
+        {
+            if (newOption.Minutes == 0 || newOption.Label == "") return;
+            this.durationOptions.Add(newOption);
+            this.DurationOptions = this.durationOptions;
+            SaveDurationOptions();
+            RaisePropertyChanged(nameof(DurationOptions));
+        }
+
+        public void DeleteDurationOption(DurationOption toDelete)
+        {
+            if (toDelete == null) return;
+            this.durationOptions.Remove(toDelete);
+            this.DurationOptions = this.durationOptions;
+            SaveDurationOptions();
+            RaisePropertyChanged(nameof(DurationOptions));
+        }
+
+        private void SaveDurationOptions()
+        {
+            _dataService.SaveDurationOptions(this.durationOptions.ToList());
+        }
+
         private void Initialize()
         {
             try
             {
-                DurationOptions = _dataService.GetDurationOptions();
+                DurationOptions = new ObservableCollection<DurationOption>(_dataService.GetDurationOptions());
             }
             catch (Exception ex)
             {

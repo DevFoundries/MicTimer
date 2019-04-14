@@ -16,9 +16,6 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.Background>
-            <SolidColorBrush Color="{Binding BackgroundColor}"></SolidColorBrush>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -39,15 +36,21 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock Grid.ColumnSpan="2" FontFamily="Segoe UI Light" FontSize="450" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Grid.Row="2" Text="{Binding Clock}" SizeChanged="FrameworkElement_OnSizeChanged" />
+        <TextBlock Grid.Column="0"  Grid.ColumnSpan="2" FontFamily="Segoe UI Light" FontSize="450" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Grid.Row="2" Text="{Binding Clock}" SizeChanged="FrameworkElement_OnSizeChanged" />
 
         
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar IsOpen="True">
+        <CommandBar x:Name="MainCommandBar">
+            <CommandBar.Content>
+                <StackPanel Orientation="Horizontal">
+                    <AppBarButton Icon="Stop" IsCompact="{Binding ElementName=MainCommandBar, Path=IsOpen, Converter={StaticResource BooleanInvertConverter}}" Label="Stop" Click="StopTimer" IsEnabled="{Binding IsRunning, Mode=OneWay}" />
+                    <AppBarButton Icon="Play" IsCompact="{Binding ElementName=MainCommandBar, Path=IsOpen, Converter={StaticResource BooleanInvertConverter}}" Label="Start" Click="StartTimer" IsEnabled="{Binding IsRunning, Mode=OneWay, Converter={StaticResource BooleanInvertConverter}}"  />
+                </StackPanel>
+            </CommandBar.Content>
             <AppBarButton Icon="Add" Label="Add" Click="AddDurationOption" />
-            <AppBarButton Icon="Stop" Label="Stop" Click="StopTimer" IsEnabled="{Binding IsRunning, Mode=OneWay}" />
-            <AppBarButton Icon="Play" Label="Start" Click="StartTimer" IsEnabled="{Binding IsRunning, Mode=OneWay, Converter={StaticResource BooleanInvertConverter}}"  />
+            <AppBarButton  Icon="Help" Label="About" Click="Help"/>
+
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

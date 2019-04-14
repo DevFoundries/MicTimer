@@ -17,11 +17,12 @@ namespace MicTimer.ViewModel
     {
         public const string SecondPageKey = "SecondPage";
         public const string DurationOptionPageKey = "DurationOptionPage";
+        public const string AboutPageKey = "AboutPage";
 
-        /// <summary>
-        /// This property can be used to force the application to run with design time data.
-        /// </summary>
-        public static bool UseDesignTimeData
+		/// <summary>
+		/// This property can be used to force the application to run with design time data.
+		/// </summary>
+		public static bool UseDesignTimeData
         {
             get
             {
@@ -36,6 +37,7 @@ namespace MicTimer.ViewModel
             var nav = new NavigationService();
             nav.Configure(SecondPageKey, typeof(SecondPage));
             nav.Configure(DurationOptionPageKey, typeof(DurationOptionPage));
+            nav.Configure(AboutPageKey, typeof(AboutPage));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             SimpleIoc.Default.Register<IDialogService, DialogService>();
