@@ -15,15 +15,15 @@
         <GridView Grid.Row="0" ItemsSource="{Binding DurationOptions, Mode=OneWay}">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="model:DurationOption">
-                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
-                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center"></TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0" Background="Red">
+                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Padding="10,0"></TextBlock>
 
-                        <TextBlock VerticalAlignment="Center">
-                            <Run>(</Run>
+                        <TextBlock VerticalAlignment="Center" Padding="0,0,10,0">
+                            <Run> (</Run>
                             <Run Text="{Binding Minutes}"></Run>
                             <Run>)</Run>
                         </TextBlock>
-                        <Button Margin="5,0,0,0" Click="DeleteOption" CommandParameter="{Binding}">Delete</Button>
+                        <Button Margin="5,5" Click="DeleteOption" CommandParameter="{Binding}" Background="DarkGray">Delete</Button>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
@@ -33,7 +33,7 @@
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
         </GridView>
-        <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid Grid.Row="1" VerticalAlignment="Center" Padding="20,20" HorizontalAlignment="Center" Background="DarkOrange">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -44,17 +44,15 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,5">Label</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,5" VerticalAlignment="Center" FontSize="20">Label</TextBlock>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newLabel" Width="150"></TextBox>
-            <TextBlock Grid.Row="2" Grid.Column="0" Margin="5,5" Width="150">Minutes</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="5,5" Width="150" VerticalAlignment="Center" FontSize="20">Minutes</TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5" x:Name="newMinutes"></TextBox>
-            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Padding="30,5" HorizontalAlignment="Center" Click="SaveClick">Save</Button>
+            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Padding="30,5" FontSize="20" HorizontalAlignment="Center" Margin="10,10" Background="Green" Click="SaveClick">Save</Button>
         </Grid>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Save" Label="Save" Click="SaveClick" />
-            <AppBarButton Icon="Cancel" Label="Cancel" Click="CancelClick" />
             <AppBarButton Icon="Back" Label="Back" Click="GoBackButtonClick" />
         </CommandBar>
     </Page.BottomAppBar>
