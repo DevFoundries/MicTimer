@@ -9,7 +9,9 @@
       xmlns:converters="using:MicTimer.Converters"
       x:Class="MicTimer.MainPage"
       mc:Ignorable="d ignore"
-      DataContext="{Binding Main, Source={StaticResource Locator}}">
+      DataContext="{Binding Main, Source={StaticResource Locator}}"
+      SizeChanged="MainPage_OnSizeChanged"
+      >
 
     <Page.Resources>
         <converters:BooleanInvertConverter x:Key="BooleanInvertConverter"></converters:BooleanInvertConverter>
@@ -18,7 +20,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*" x:Name="CounterRow"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -36,7 +38,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock Grid.Column="0"  Grid.ColumnSpan="2" FontFamily="Segoe UI Light" FontSize="450" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" Grid.Row="2" Text="{Binding Clock}" SizeChanged="FrameworkElement_OnSizeChanged" />
+        <TextBlock x:Name="CounterBlock" Grid.Column="0"  Grid.ColumnSpan="2" FontFamily="Segoe UI Light" 
+                   FontSize="450" HorizontalAlignment="Center" 
+                   TextAlignment="Center" VerticalAlignment="Center" 
+                   Foreground="White" Grid.Row="1" Text="{Binding Clock}"/>
 
         
     </Grid>

@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -50,15 +51,6 @@ namespace MicTimer
             Vm.RunClock();
         }
 
-        private void FrameworkElement_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var textBlock = sender as TextBlock;
-            if (textBlock != null)
-            {
-                textBlock.HorizontalTextAlignment = TextAlignment.Center;
-            }
-        }
-
         private void AddDurationOption(object sender, RoutedEventArgs e)
         {
 	        var navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
@@ -72,5 +64,22 @@ namespace MicTimer
 	        navigationService.NavigateTo(ViewModelLocator.AboutPageKey);
 
 		}
-	}
+
+        private void MainPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            SetCounterSize();
+        }
+
+        private void SetCounterSize()
+        {
+            double height = this.CounterRow.ActualHeight;
+            // Get the ratio of the TextBlock's height to that of the TextBox’s 
+            double fontsizeMultiplier = Math.Sqrt(height / this.CounterBlock.ActualHeight);
+
+            // Set the new FontSize 
+            this.CounterBlock.FontSize = Math.Floor(this.CounterBlock.FontSize * fontsizeMultiplier);
+            this.CounterBlock.HorizontalAlignment = HorizontalAlignment.Center;
+
+        }
+    }
 }
