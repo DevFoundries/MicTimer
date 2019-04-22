@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="55379Wm.BarrettSimms.MicTimer" Publisher="CN=7B4F372A-32B9-405A-AE54-EE84EB99028B" Version="1.0.17.0" />
+  <Identity Name="55379Wm.BarrettSimms.MicTimer" Publisher="CN=7B4F372A-32B9-405A-AE54-EE84EB99028B" Version="1.0.20.0" />
   <mp:PhoneIdentity PhoneProductId="c79d5f63-32aa-4235-b4fa-8ab19086279a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Mic Timer</DisplayName>

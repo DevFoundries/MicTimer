@@ -128,13 +128,12 @@ namespace MicTimer.ViewModel
                             Clock = TimeSpan.FromSeconds(currentTimer).ToString("mm\\:ss");
                             if (currentTimer <= 150 && currentTimer > 0)
                             {
-                                BackgroundColor = Colors.DarkGoldenrod;
-
+                                BackgroundColor = new SolidColorBrush(Colors.DarkGoldenrod);
                             }
                             if (currentTimer <= 0)
                             {
                                 Clock = "- " + Clock;
-                                BackgroundColor = Colors.Red;
+                                BackgroundColor = new SolidColorBrush(Colors.Red);
                             }
 
                             currentTimer--;
@@ -149,8 +148,8 @@ namespace MicTimer.ViewModel
             });
         }
 
-        private Color _solidColor = Colors.Black;
-        public Color BackgroundColor
+        private SolidColorBrush _solidColor = new SolidColorBrush(Colors.Black);
+        public SolidColorBrush BackgroundColor
         {
             get
             {
@@ -164,7 +163,7 @@ namespace MicTimer.ViewModel
 
         public void ResetClock()
         {
-            BackgroundColor = Colors.Black;
+            BackgroundColor = new SolidColorBrush(Colors.Black);
             currentTimer = timerMinutes * 60;
         }
 
