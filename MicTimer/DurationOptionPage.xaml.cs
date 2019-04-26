@@ -25,27 +25,22 @@ namespace MicTimer
             nav.GoBack();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-        }
-
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-	        Vm.AddDurationOption(new DurationOption(){ Minutes = Convert.ToInt32(this.newMinutes.Text), Label = this.newLabel.Text});
+	        Vm.AddDurationOption(new DurationOption(){ Minutes = Convert.ToInt32(this.newMinutes.Value), Label = this.newLabel.Text});
             this.newLabel.Text = "";
-            this.newMinutes.Text = "";
-        }
-
-        private void CancelClick(object sender, RoutedEventArgs e)
-        {
-	        
+            this.newMinutes.Value = "";
         }
 
         private void DeleteOption(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
             Vm.DeleteDurationOption(b.CommandParameter as DurationOption);
+        }
+
+        private void SaveSettingsClick(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

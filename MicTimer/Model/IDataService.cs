@@ -7,6 +7,8 @@ namespace MicTimer.Model
     {
 	    List<DurationOption> GetDurationOptions();
 	    void SaveDurationOptions(List<DurationOption> durationOptions);
+        Settings GetSettings();
+        void SaveSettings(Settings settings);
 
     }
 
@@ -14,5 +16,11 @@ namespace MicTimer.Model
     {
 	    public int Minutes { get; set; }
 		public string Label { get; set; }
+    }
+
+    public class Settings
+    {
+        public int WarnAtSeconds { get; set; }
+        public int AlertAtSeconds { get; set; }
     }
 }

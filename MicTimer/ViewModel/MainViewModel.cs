@@ -32,12 +32,19 @@ namespace MicTimer.ViewModel
         private bool isRunning;
         private string _welcomeTitle = string.Empty;
 		private ObservableCollection<DurationOption> durationOptions;
+        private Settings settings;
 
 		public bool IsRunning
 		{
 			get => isRunning;
 			set => Set(ref isRunning, value);
 		}
+
+        public Settings Settings
+        {
+            get { return this.settings; }
+            set { Set(ref settings, value); }
+        }
 
 		public ObservableCollection<DurationOption> DurationOptions
 		{
@@ -195,11 +202,17 @@ namespace MicTimer.ViewModel
             _dataService.SaveDurationOptions(this.durationOptions.ToList());
         }
 
+        private void SaveSettings()
+        {
+            _dataService.SaveSettings(this.settings);
+        }
+
         private void Initialize()
         {
             try
             {
                 DurationOptions = new ObservableCollection<DurationOption>(_dataService.GetDurationOptions());
+                Settings = _dataService.GetSettings();
             }
             catch (Exception ex)
             {

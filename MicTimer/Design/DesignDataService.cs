@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using MicTimer.Model;
 
@@ -20,6 +21,17 @@ namespace MicTimer.Design
 	    {
 	    }
 
+        public Settings GetSettings()
+        {
+            return new Settings()
+            {
+                AlertAtSeconds = 0,
+                WarnAtSeconds = 120
+            };
+        }
 
-	}
+        public void SaveSettings(Settings settings)
+        {
+        }
+    }
 }

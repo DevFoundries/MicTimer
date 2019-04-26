@@ -41,5 +41,36 @@ namespace MicTimer.Model
 		    localSettings.Values["DurationOptions"] = toSave;
 
 	    }
-	}
+
+        public Settings GetSettings()
+        {
+            Windows.Storage.ApplicationDataContainer localSettings =
+                Windows.Storage.ApplicationData.Current.LocalSettings;
+            var settings = localSettings.Values["Settings"] as string;
+            if (settings == null)
+            {
+                var defaultSettings = new Settings()
+                {
+                      AlertAtSeconds = 150,
+                      WarnAtSeconds = 0
+                };
+                SaveSettings(defaultSettings);
+            }
+            else
+            {
+
+                return JsonConvert.DeserializeObject<Settings>(settings);
+            }
+
+            return GetSettings();
+        }
+
+        public void SaveSettings(Settings settings)
+        {
+            string toSave = JsonConvert.SerializeObject(settings);
+            Windows.Storage.ApplicationDataContainer localSettings =
+                Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Settings"] = toSave;
+        }
+    }
 }

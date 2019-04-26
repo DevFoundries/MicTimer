@@ -4,12 +4,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:model="using:MicTimer.Model"
-      mc:Ignorable="d"
-      DataContext="{Binding Main, Source={StaticResource Locator}}">
+      xmlns:editors="using:Syncfusion.UI.Xaml.Controls.Input"
+      mc:Ignorable="d">
 
     <Grid Padding="20,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <GridView Grid.Row="0" ItemsSource="{Binding DurationOptions, Mode=OneWay}">
@@ -37,18 +38,34 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,5" VerticalAlignment="Center" FontSize="20">Label</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newLabel" Width="150"></TextBox>
-            <TextBlock Grid.Row="2" Grid.Column="0" Margin="5,5" Width="150" VerticalAlignment="Center" FontSize="20">Minutes</TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5" x:Name="newMinutes"></TextBox>
-            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Padding="30,5" FontSize="20" HorizontalAlignment="Center" Margin="10,10" Background="Green" Click="SaveClick">Save</Button>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,5" VerticalAlignment="Center" FontSize="20">Label</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5" x:Name="newLabel" Width="150"></TextBox>
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,5" Width="150" VerticalAlignment="Center" FontSize="20">Minutes</TextBlock>
+            <editors:SfNumericUpDown Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newMinutes" Width="150" SpinButtonsAlignment="Both"></editors:SfNumericUpDown>
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="30,5" FontSize="20" HorizontalAlignment="Center" Margin="10,10" Background="Green" Click="SaveClick">Save</Button>
+        </Grid>
+        <Grid Grid.Row="2" VerticalAlignment="Center" Padding="20,20" HorizontalAlignment="Center" Background="DarkGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,5" VerticalAlignment="Center" FontSize="20">Warn at seconds</TextBlock>
+            <editors:SfNumericUpDown Grid.Row="0" Grid.Column="1" Margin="5,5" x:Name="newWarnAt" Width="150" SpinButtonsAlignment="Both"></editors:SfNumericUpDown>
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,5" Width="150" VerticalAlignment="Center" FontSize="20">Alert at seconds</TextBlock>
+            <editors:SfNumericUpDown Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newAlertAt" SpinButtonsAlignment="Both"></editors:SfNumericUpDown>
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="30,5" FontSize="20" HorizontalAlignment="Center" Margin="10,10" Background="Green" Click="SaveSettingsClick">Save</Button>
+
         </Grid>
     </Grid>
     <Page.BottomAppBar>
