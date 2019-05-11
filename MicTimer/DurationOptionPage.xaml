@@ -4,7 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:model="using:MicTimer.Model"
-      xmlns:editors="using:Syncfusion.UI.Xaml.Controls.Input"
+      DataContext="{Binding Main, Source={StaticResource Locator}}"
       mc:Ignorable="d">
 
     <Grid Padding="20,20">
@@ -16,9 +16,8 @@
         <GridView Grid.Row="0" ItemsSource="{Binding DurationOptions, Mode=OneWay}">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="model:DurationOption">
-                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0" Background="Red">
+                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0" Background="Red" HorizontalAlignment="Stretch">
                         <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Padding="10,0"></TextBlock>
-
                         <TextBlock VerticalAlignment="Center" Padding="0,0,10,0">
                             <Run> (</Run>
                             <Run Text="{Binding Minutes}"></Run>
@@ -30,7 +29,7 @@
             </GridView.ItemTemplate>
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal" HorizontalAlignment="Left"></ItemsWrapGrid>
+                    <ItemsWrapGrid MaximumRowsOrColumns="4" Width="Auto" ItemWidth="250" Orientation="Horizontal" HorizontalAlignment="Left"></ItemsWrapGrid>
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
         </GridView>
@@ -47,7 +46,7 @@
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,5" VerticalAlignment="Center" FontSize="20">Label</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5" x:Name="newLabel" Width="150"></TextBox>
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,5" Width="150" VerticalAlignment="Center" FontSize="20">Minutes</TextBlock>
-            <editors:SfNumericUpDown Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newMinutes" Width="150" SpinButtonsAlignment="Both"></editors:SfNumericUpDown>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newMinutes" Width="150" ></TextBox>
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="30,5" FontSize="20" HorizontalAlignment="Center" Margin="10,10" Background="Green" Click="SaveClick">Save</Button>
         </Grid>
         <Grid Grid.Row="2" VerticalAlignment="Center" Padding="20,20" HorizontalAlignment="Center" Background="DarkGray">
@@ -61,9 +60,9 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,5" VerticalAlignment="Center" FontSize="20">Warn at seconds</TextBlock>
-            <editors:SfNumericUpDown Grid.Row="0" Grid.Column="1" Margin="5,5" x:Name="newWarnAt" Width="150" SpinButtonsAlignment="Both"></editors:SfNumericUpDown>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5" x:Name="newWarnAt" Width="150" Text="{Binding Settings.WarnAtSeconds, Mode=TwoWay}"></TextBox>
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="5,5" Width="150" VerticalAlignment="Center" FontSize="20">Alert at seconds</TextBlock>
-            <editors:SfNumericUpDown Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newAlertAt" SpinButtonsAlignment="Both"></editors:SfNumericUpDown>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5" x:Name="newAlertAt" Text="{Binding Settings.AlertAtSeconds, Mode=TwoWay}"></TextBox>
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="30,5" FontSize="20" HorizontalAlignment="Center" Margin="10,10" Background="Green" Click="SaveSettingsClick">Save</Button>
 
         </Grid>

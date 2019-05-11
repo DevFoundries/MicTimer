@@ -27,9 +27,9 @@ namespace MicTimer
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-	        Vm.AddDurationOption(new DurationOption(){ Minutes = Convert.ToInt32(this.newMinutes.Value), Label = this.newLabel.Text});
+	        Vm.AddDurationOption(new DurationOption(){ Minutes = Convert.ToInt32(this.newMinutes.Text), Label = this.newLabel.Text});
             this.newLabel.Text = "";
-            this.newMinutes.Value = "";
+            this.newMinutes.Text = "";
         }
 
         private void DeleteOption(object sender, RoutedEventArgs e)
@@ -40,7 +40,7 @@ namespace MicTimer
 
         private void SaveSettingsClick(object sender, RoutedEventArgs e)
         {
-            
+            Vm.SaveSettings();
         }
     }
 }

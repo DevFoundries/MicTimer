@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
+using MicTimer.Messages;
 using MicTimer.Model;
 
 namespace MicTimer.ViewModel
@@ -33,6 +34,7 @@ namespace MicTimer.ViewModel
         private string _welcomeTitle = string.Empty;
 		private ObservableCollection<DurationOption> durationOptions;
         private Settings settings;
+        private TimerState currentTimerState = TimerState.Normal;
 
 		public bool IsRunning
 		{
@@ -76,6 +78,7 @@ namespace MicTimer.ViewModel
                                timerMinutes = p;
                                currentTimer = timerMinutes * 60;
                                Clock = TimeSpan.FromSeconds(currentTimer).ToString("mm\\:ss");
+                               BackgroundColor = new SolidColorBrush(Colors.Black);
                            }
                        ));
             }
@@ -92,19 +95,6 @@ namespace MicTimer.ViewModel
                            p => !string.IsNullOrEmpty(p)));
             }
 	        set => throw new NotImplementedException();
-        }
-
-        public string WelcomeTitle
-        {
-            get
-            {
-                return _welcomeTitle;
-            }
-
-            set
-            {
-                Set(ref _welcomeTitle, value);
-            }
         }
 
         public MainViewModel(
@@ -133,14 +123,26 @@ namespace MicTimer.ViewModel
                         DispatcherHelper.CheckBeginInvokeOnUI(() =>
                         {
                             Clock = TimeSpan.FromSeconds(currentTimer).ToString("mm\\:ss");
-                            if (currentTimer <= 150 && currentTimer > 0)
+                            if (currentTimer <= settings.WarnAtSeconds && currentTimer > settings.AlertAtSeconds)
                             {
                                 BackgroundColor = new SolidColorBrush(Colors.DarkGoldenrod);
+                                if (this.currentTimerState != TimerState.Warn)
+                                {
+                                    this.currentTimerState = TimerState.Warn;
+                                    Messenger.Default.Send<TimerStateMessage>(new TimerStateMessage()
+                                        {TimerState = this.currentTimerState});
+                                }
                             }
-                            if (currentTimer <= 0)
+                            if (currentTimer <= settings.AlertAtSeconds)
                             {
                                 Clock = "- " + Clock;
                                 BackgroundColor = new SolidColorBrush(Colors.Red);
+                                if (this.currentTimerState != TimerState.Alert)
+                                {
+                                    this.currentTimerState = TimerState.Alert;
+                                    Messenger.Default.Send<TimerStateMessage>(new TimerStateMessage()
+                                        {TimerState = this.currentTimerState});
+                                }
                             }
 
                             currentTimer--;
@@ -172,6 +174,7 @@ namespace MicTimer.ViewModel
         {
             BackgroundColor = new SolidColorBrush(Colors.Black);
             currentTimer = timerMinutes * 60;
+            this.currentTimerState = TimerState.Normal;
         }
 
         public void StopClock()
@@ -202,7 +205,7 @@ namespace MicTimer.ViewModel
             _dataService.SaveDurationOptions(this.durationOptions.ToList());
         }
 
-        private void SaveSettings()
+        public void SaveSettings()
         {
             _dataService.SaveSettings(this.settings);
         }
@@ -217,7 +220,6 @@ namespace MicTimer.ViewModel
             catch (Exception ex)
             {
                 // Report error here
-                WelcomeTitle = ex.Message;
             }
         }
 

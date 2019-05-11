@@ -17,7 +17,7 @@
         <converters:BooleanInvertConverter x:Key="BooleanInvertConverter"></converters:BooleanInvertConverter>
     </Page.Resources>
 
-    <Grid Background="{Binding BackgroundColor}">
+    <Grid Background="{Binding BackgroundColor, Mode=OneWay}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*" x:Name="CounterRow"></RowDefinition>

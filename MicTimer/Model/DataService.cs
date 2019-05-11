@@ -51,8 +51,8 @@ namespace MicTimer.Model
             {
                 var defaultSettings = new Settings()
                 {
-                      AlertAtSeconds = 150,
-                      WarnAtSeconds = 0
+                      AlertAtSeconds = 0,
+                      WarnAtSeconds = 150
                 };
                 SaveSettings(defaultSettings);
             }
